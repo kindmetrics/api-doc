@@ -1,11 +1,11 @@
 ---
-title: API Reference
+title: Kindmetrics API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='https://app.kindmetrics.io/sign_up'>Sign Up for a Developer Key</a>
   - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
@@ -47,7 +47,6 @@ You must replace <code>APITOKEN</code> with your personal API key.
 ## Get Your Domains
 
 ```shell
-# With shell, you can just pass the correct header with each request
 curl "https://app.kindmetrics.io/api/domains"
   -H "Authorization: APIKEY"
 ```
@@ -69,10 +68,9 @@ This endpoint retrieves all your domains.
 
 `GET https://app.kindmetrics.io/api/domains`
 
-## Retreive one Domain
+## Retrieve one Domain
 
 ```shell
-# With shell, you can just pass the correct header with each request
 curl "https://app.kindmetrics.io/api/domains/1"
   -H "Authorization: APIKEY"
 ```
@@ -81,11 +79,11 @@ curl "https://app.kindmetrics.io/api/domains/1"
 
 ```json
 {
-    "address": "kindmetrics.io",
-    "visitors": 3041,
-    "pageviews": 5643,
-    "bounce": 64,
-    "track_snippet": "<script src=\"https://localhost:5000/js/kind.js\" defer=\"true\" data-domain=\"kindmetrics.io\"></script>"
+  "address": "kindmetrics.io",
+  "visitors": 3041,
+  "pageviews": 5643,
+  "bounce": 64,
+  "track_snippet": "<script src=\"https://kindmetrics.io/js/kind.js\" defer=\"true\" data-domain=\"kindmetrics.io\"></script>"
 }
 ```
 
@@ -95,10 +93,25 @@ This endpoint retrieves one of your domains.
 
 `GET https://app.kindmetrics.io/api/domains/1`
 
-## Retreive Pages for Domain
+### Query Parameters
+
+Parameter   | Default        | Description
+------------|----------------|------------
+to          | Today          | Date you want to show the stats to, can be today or earlier, not in the future, like: `2020-06-01`
+from        | 7 days ago     | Date where you want to show stats from, like: `2020-04-01`
+source_name | None           | Source you want to filter on. Like `Google` or `indiehackers.com`
+medium_name | None           | Group of sources you want to filter on, like `Social` or `Search`
+site_path   | None           | url path of your site you want to see aggregated stats for, like `/blog`
+goal_id     | None           | aggregate stats for goals - get goal id from the goal api endpoint
+
+
+# Domain stats
+
+You can get all data you can see on the dashboard in different requests. They will be aggregated results and show the data based on the period you have chosen.
+
+## Retreive Pages
 
 ```shell
-# With shell, you can just pass the correct header with each request
 curl "https://app.kindmetrics.io/api/domains/1/pages"
   -H "Authorization: APIKEY"
 ```
@@ -121,11 +134,21 @@ This endpoint retrieves pages stats for your domain.
 
 `GET https://app.kindmetrics.io/api/domains/1/pages`
 
-## Retreive Sources for Domain
+### Query Parameters
+
+Parameter   | Default        | Description
+------------|----------------|------------
+to          | Today          | Date you want to show the stats to, can be today or earlier, not in the future, like: `2020-06-01`
+from        | 7 days ago     | Date where you want to show stats from, like: `2020-04-01`
+source_name | None           | Source you want to filter on. Like `Google` or `indiehackers.com`
+medium_name | None           | Group of sources you want to filter on, like `Social` or `Search`
+site_path   | None           | url path of your site you want to see aggregated stats for, like `/blog`
+goal_id     | None           | aggregate stats for goals - get goal id from the goal api endpoint
+
+## Retreive Sources
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "https://app.kindmetrics.io/api/domains/1/pages"
+curl "https://app.kindmetrics.io/api/domains/1/sources"
   -H "Authorization: APIKEY"
 ```
 
@@ -144,8 +167,76 @@ curl "https://app.kindmetrics.io/api/domains/1/pages"
 ]
 ```
 
-This endpoint retrieves pages stats for your domain.
+This endpoint retrieves sources stats for your domain.
 
 ### HTTP Request
 
-`GET https://app.kindmetrics.io/api/domains/1/pages`
+`GET https://app.kindmetrics.io/api/domains/1/sources`
+
+### Query Parameters
+
+Parameter   | Default        | Description
+------------|----------------|------------
+to          | Today          | Date you want to show the stats to, can be today or earlier, not in the future, like: `2020-06-01`
+from        | 7 days ago     | Date where you want to show stats from, like: `2020-04-01`
+source_name | None           | Source you want to filter on. Like `Google` or `indiehackers.com`
+medium_name | None           | Group of sources you want to filter on, like `Social` or `Search`
+site_path   | None           | url path of your site you want to see aggregated stats for, like `/blog`
+goal_id     | None           | aggregate stats for goals - get goal id from the goal api endpoint
+
+## Retreive Countries
+
+```shell
+curl "https://app.kindmetrics.io/api/domains/1/countries"
+  -H "Authorization: APIKEY"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "name": "Sweden",
+    "visitors": 12,
+    "percentage": 24
+  }
+]
+```
+
+This endpoint retrieves countries stats for your domain.
+
+### HTTP Request
+
+`GET https://app.kindmetrics.io/api/domains/1/countries`
+
+### Query Parameters
+
+Parameter   | Default        | Description
+------------|----------------|------------
+to          | Today          | Date you want to show the stats to, can be today or earlier, not in the future, like: `2020-06-01`
+from        | 7 days ago     | Date where you want to show stats from, like: `2020-04-01`
+source_name | None           | Source you want to filter on. Like `Google` or `indiehackers.com`
+medium_name | None           | Group of sources you want to filter on, like `Social` or `Search`
+site_path   | None           | url path of your site you want to see aggregated stats for, like `/blog`
+goal_id     | None           | aggregate stats for goals - get goal id from the goal api endpoint
+
+## Retreive Current Visitors
+
+```shell
+curl "https://app.kindmetrics.io/api/domains/1/current"
+  -H "Authorization: APIKEY"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "current": 3
+}
+```
+
+This endpoint retrieves current visitors for your domain.
+
+### HTTP Request
+
+`GET https://app.kindmetrics.io/api/domains/1/current`
