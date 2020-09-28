@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Kindmetrics API Reference</title>
 
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -318,13 +318,24 @@
                     <a href="#get-your-domains" class="toc-h2 toc-link" data-title="Get Your Domains">Get Your Domains</a>
                   </li>
                   <li>
-                    <a href="#retreive-one-domain" class="toc-h2 toc-link" data-title="Retreive one Domain">Retreive one Domain</a>
+                    <a href="#retrieve-one-domain" class="toc-h2 toc-link" data-title="Retrieve one Domain">Retrieve one Domain</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#domain-stats" class="toc-h1 toc-link" data-title="Domain stats">Domain stats</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#retreive-pages" class="toc-h2 toc-link" data-title="Retreive Pages">Retreive Pages</a>
                   </li>
                   <li>
-                    <a href="#retreive-pages-for-domain" class="toc-h2 toc-link" data-title="Retreive Pages for Domain">Retreive Pages for Domain</a>
+                    <a href="#retreive-sources" class="toc-h2 toc-link" data-title="Retreive Sources">Retreive Sources</a>
                   </li>
                   <li>
-                    <a href="#retreive-sources-for-domain" class="toc-h2 toc-link" data-title="Retreive Sources for Domain">Retreive Sources for Domain</a>
+                    <a href="#retreive-countries" class="toc-h2 toc-link" data-title="Retreive Countries">Retreive Countries</a>
+                  </li>
+                  <li>
+                    <a href="#retreive-current-visitors" class="toc-h2 toc-link" data-title="Retreive Current Visitors">Retreive Current Visitors</a>
                   </li>
               </ul>
           </li>
@@ -333,7 +344,7 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://app.kindmetrics.io/sign_up'>Sign Up for a Developer Key</a></li>
             <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -363,8 +374,7 @@ curl <span class="s2">"https://app.kindmetrics.io/api/domains"</span>
 <aside class="notice">
 You must replace <code>APITOKEN</code> with your personal API key.
 </aside>
-<h1 id='domains'>Domains</h1><h2 id='get-your-domains'>Get Your Domains</h2><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"https://app.kindmetrics.io/api/domains"</span>
+<h1 id='domains'>Domains</h1><h2 id='get-your-domains'>Get Your Domains</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://app.kindmetrics.io/api/domains"</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: APIKEY"</span>
 </code></pre></div>
 <blockquote>
@@ -380,26 +390,65 @@ curl <span class="s2">"https://app.kindmetrics.io/api/domains"</span>
 <p>This endpoint retrieves all your domains.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET https://app.kindmetrics.io/api/domains</code></p>
-<h2 id='retreive-one-domain'>Retreive one Domain</h2><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"https://app.kindmetrics.io/api/domains/1"</span>
+<h2 id='retrieve-one-domain'>Retrieve one Domain</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://app.kindmetrics.io/api/domains/1"</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: APIKEY"</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kindmetrics.io"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"visitors"</span><span class="p">:</span><span class="w"> </span><span class="mi">3041</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"pageviews"</span><span class="p">:</span><span class="w"> </span><span class="mi">5643</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"bounce"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"track_snippet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;script src=</span><span class="se">\"</span><span class="s2">https://localhost:5000/js/kind.js</span><span class="se">\"</span><span class="s2"> defer=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> data-domain=</span><span class="se">\"</span><span class="s2">kindmetrics.io</span><span class="se">\"</span><span class="s2">&gt;&lt;/script&gt;"</span><span class="w">
+  </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kindmetrics.io"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"visitors"</span><span class="p">:</span><span class="w"> </span><span class="mi">3041</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pageviews"</span><span class="p">:</span><span class="w"> </span><span class="mi">5643</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bounce"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"track_snippet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;script src=</span><span class="se">\"</span><span class="s2">https://kindmetrics.io/js/kind.js</span><span class="se">\"</span><span class="s2"> defer=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> data-domain=</span><span class="se">\"</span><span class="s2">kindmetrics.io</span><span class="se">\"</span><span class="s2">&gt;&lt;/script&gt;"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves one of your domains.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET https://app.kindmetrics.io/api/domains/1</code></p>
-<h2 id='retreive-pages-for-domain'>Retreive Pages for Domain</h2><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"https://app.kindmetrics.io/api/domains/1/pages"</span>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>to</td>
+<td>Today</td>
+<td>Date you want to show the stats to, can be today or earlier, not in the future, like: <code>2020-06-01</code></td>
+</tr>
+<tr>
+<td>from</td>
+<td>7 days ago</td>
+<td>Date where you want to show stats from, like: <code>2020-04-01</code></td>
+</tr>
+<tr>
+<td>source_name</td>
+<td>None</td>
+<td>Source you want to filter on. Like <code>Google</code> or <code>indiehackers.com</code></td>
+</tr>
+<tr>
+<td>medium_name</td>
+<td>None</td>
+<td>Group of sources you want to filter on, like <code>Social</code> or <code>Search</code></td>
+</tr>
+<tr>
+<td>site_path</td>
+<td>None</td>
+<td>url path of your site you want to see aggregated stats for, like <code>/blog</code></td>
+</tr>
+<tr>
+<td>goal_id</td>
+<td>None</td>
+<td>aggregate stats for goals - get goal id from the goal api endpoint</td>
+</tr>
+</tbody></table>
+<h1 id='domain-stats'>Domain stats</h1>
+<p>You can get all data you can see on the dashboard in different requests. They will be aggregated results and show the data based on the period you have chosen.</p>
+<h2 id='retreive-pages'>Retreive Pages</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://app.kindmetrics.io/api/domains/1/pages"</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: APIKEY"</span>
 </code></pre></div>
 <blockquote>
@@ -416,8 +465,46 @@ curl <span class="s2">"https://app.kindmetrics.io/api/domains/1/pages"</span>
 <p>This endpoint retrieves pages stats for your domain.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET https://app.kindmetrics.io/api/domains/1/pages</code></p>
-<h2 id='retreive-sources-for-domain'>Retreive Sources for Domain</h2><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"https://app.kindmetrics.io/api/domains/1/pages"</span>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>to</td>
+<td>Today</td>
+<td>Date you want to show the stats to, can be today or earlier, not in the future, like: <code>2020-06-01</code></td>
+</tr>
+<tr>
+<td>from</td>
+<td>7 days ago</td>
+<td>Date where you want to show stats from, like: <code>2020-04-01</code></td>
+</tr>
+<tr>
+<td>source_name</td>
+<td>None</td>
+<td>Source you want to filter on. Like <code>Google</code> or <code>indiehackers.com</code></td>
+</tr>
+<tr>
+<td>medium_name</td>
+<td>None</td>
+<td>Group of sources you want to filter on, like <code>Social</code> or <code>Search</code></td>
+</tr>
+<tr>
+<td>site_path</td>
+<td>None</td>
+<td>url path of your site you want to see aggregated stats for, like <code>/blog</code></td>
+</tr>
+<tr>
+<td>goal_id</td>
+<td>None</td>
+<td>aggregate stats for goals - get goal id from the goal api endpoint</td>
+</tr>
+</tbody></table>
+<h2 id='retreive-sources'>Retreive Sources</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://app.kindmetrics.io/api/domains/1/sources"</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: APIKEY"</span>
 </code></pre></div>
 <blockquote>
@@ -434,15 +521,119 @@ curl <span class="s2">"https://app.kindmetrics.io/api/domains/1/pages"</span>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves pages stats for your domain.</p>
+<p>This endpoint retrieves sources stats for your domain.</p>
 <h3 id='http-request-4'>HTTP Request</h3>
-<p><code>GET https://app.kindmetrics.io/api/domains/1/pages</code></p>
+<p><code>GET https://app.kindmetrics.io/api/domains/1/sources</code></p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>to</td>
+<td>Today</td>
+<td>Date you want to show the stats to, can be today or earlier, not in the future, like: <code>2020-06-01</code></td>
+</tr>
+<tr>
+<td>from</td>
+<td>7 days ago</td>
+<td>Date where you want to show stats from, like: <code>2020-04-01</code></td>
+</tr>
+<tr>
+<td>source_name</td>
+<td>None</td>
+<td>Source you want to filter on. Like <code>Google</code> or <code>indiehackers.com</code></td>
+</tr>
+<tr>
+<td>medium_name</td>
+<td>None</td>
+<td>Group of sources you want to filter on, like <code>Social</code> or <code>Search</code></td>
+</tr>
+<tr>
+<td>site_path</td>
+<td>None</td>
+<td>url path of your site you want to see aggregated stats for, like <code>/blog</code></td>
+</tr>
+<tr>
+<td>goal_id</td>
+<td>None</td>
+<td>aggregate stats for goals - get goal id from the goal api endpoint</td>
+</tr>
+</tbody></table>
+<h2 id='retreive-countries'>Retreive Countries</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://app.kindmetrics.io/api/domains/1/countries"</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: APIKEY"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sweden"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"visitors"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves countries stats for your domain.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET https://app.kindmetrics.io/api/domains/1/countries</code></p>
+<h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>to</td>
+<td>Today</td>
+<td>Date you want to show the stats to, can be today or earlier, not in the future, like: <code>2020-06-01</code></td>
+</tr>
+<tr>
+<td>from</td>
+<td>7 days ago</td>
+<td>Date where you want to show stats from, like: <code>2020-04-01</code></td>
+</tr>
+<tr>
+<td>source_name</td>
+<td>None</td>
+<td>Source you want to filter on. Like <code>Google</code> or <code>indiehackers.com</code></td>
+</tr>
+<tr>
+<td>medium_name</td>
+<td>None</td>
+<td>Group of sources you want to filter on, like <code>Social</code> or <code>Search</code></td>
+</tr>
+<tr>
+<td>site_path</td>
+<td>None</td>
+<td>url path of your site you want to see aggregated stats for, like <code>/blog</code></td>
+</tr>
+<tr>
+<td>goal_id</td>
+<td>None</td>
+<td>aggregate stats for goals - get goal id from the goal api endpoint</td>
+</tr>
+</tbody></table>
+<h2 id='retreive-current-visitors'>Retreive Current Visitors</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://app.kindmetrics.io/api/domains/1/current"</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: APIKEY"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"current"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves current visitors for your domain.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>GET https://app.kindmetrics.io/api/domains/1/current</code></p>
 <h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
-
-<p>The Kittn API uses the following error codes:</p>
+<p>The Kindmetrics API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -464,23 +655,19 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
+<td>Not Found -- The specified domain could not be found.</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+<td>Method Not Allowed -- You tried to access a domain with an invalid method.</td>
 </tr>
 <tr>
 <td>406</td>
 <td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
 </tr>
 <tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
 <td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>Too Many Requests</td>
 </tr>
 <tr>
 <td>500</td>
