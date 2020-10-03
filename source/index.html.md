@@ -36,7 +36,7 @@ Kindmetrics uses API keys to allow access to the API. You can get your API key a
 
 Kindmetrics expect the token to be an param (`?token=APITOKEN`) or in the headers like below:
 
-`Authorization: APITOKEN`
+`Authorization: Bearer APITOKEN`
 
 <aside class="notice">
 You must replace <code>APITOKEN</code> with your personal API key.
